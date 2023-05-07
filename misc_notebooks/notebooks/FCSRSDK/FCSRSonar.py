@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append('/home/pi/work/notebooks/TurboPi/')
+sys.path.append('/home/pi/work/notebooks/')
 #import HiwonderSDK.FCSRBoard as FCSRBoard
 import time
 from smbus2 import SMBus, i2c_msg
@@ -114,8 +114,8 @@ class Sonar:
                 read = i2c_msg.read(self.i2c_addr, 2)
                 bus.i2c_rdwr(read)
                 dist = int.from_bytes(bytes(list(read)), byteorder='little', signed=False)
-                if dist > 5000:
-                    dist = 5000
+                if dist > 110:
+                    dist = 99999   # sensor is inaccurate beyond 110 mm
         except BaseException as e:
             print(e)
         return dist
