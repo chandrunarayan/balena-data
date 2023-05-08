@@ -114,8 +114,8 @@ class Sonar:
                 read = i2c_msg.read(self.i2c_addr, 2)
                 bus.i2c_rdwr(read)
                 dist = int.from_bytes(bytes(list(read)), byteorder='little', signed=False)
-                if dist > 110:
-                    dist = 99999   # sensor is inaccurate beyond 110 mm
+                if dist > 1000:
+                    dist = 99999   # sensor is inaccurate beyond 100 cm
         except BaseException as e:
             print(e)
         return dist
